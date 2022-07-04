@@ -1,31 +1,50 @@
 window.onload = function(){
     document.getElementById("add-button").addEventListener("click", addNum);
+    document.getElementById("schedule").setAttribute("onkeyup","enterkey()")
 }
 
 function addNum() {
     // 내용 만들기
     let num = document.getElementById("schedule").value;
+    const now = new Date();
     // 날짜에 현재 날짜 넣기
-    let today = new Date();   
+    function getToday(){
+        let date = new Date();
+        let yyyy = date.getFullYear();
+        let mm = date.getMonth()+1;
+        let dd = date.getDate();
 
-    let year = today.getFullYear(); // 년도
-    let month = today.getMonth() + 1;  // 월
-    let date = today.getDate();  // 날짜
+        if (mm < 10)
+            mm = "0" + mm;
+        if (dd < 10)
+            dd = "0" + dd;
+            
+        return yyyy + "." + mm + "." +dd;
+        console.log(moment(). format('yyyy년 mm 월 dd 일'));
+    }
 
     // 최종 날짜 
-    let day = (year + '/' + month + '/' + date)
+    // let day = (year + '/' + month + '/' + date)
     // 체크박스 만들기
-    let check = document.createElement("INPUT")
-    check.setAttribute("type","checkbox")
+    let checkbox = document.createElement("INPUT");
+    checkbox.setAttribute("type", "checkbox");
+    checkbox.addEventListener("click",function(){
+        
+        if (!confirm("삭제하시겠습니까?")) {
+            checkbox.checked = false;
+        } else {
+            checkbox.parentNode.parentNode.remove();
+        }
+    });
 
     // 열 만들기
     let todo_date = document.createElement('td');
     let todo_num = document.createElement('td');
     let todo_done = document.createElement('td');
     // 열안에 값 넣기
-    todo_date.innerText = day;
+    todo_date.innerText = now;
     todo_num.innerText = num;
-    todo_done.appendChild(check);
+    todo_done.appendChild(checkbox);
     // 행 만들기
     let row = document.createElement('tr');
     // 헹에 열 넣기
@@ -41,5 +60,9 @@ function addNum() {
 }
 
 
-
+function enterkey() {
+	if (window.event.keyCode == 13) {
+    	addNum()
+    }
+}
 
