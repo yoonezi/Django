@@ -9,18 +9,18 @@ function addNum() {
     const now = new Date();
     // 날짜에 현재 날짜 넣기
     function getToday(){
-        let date = new Date();
-        let yyyy = date.getFullYear();
-        let mm = date.getMonth()+1;
-        let dd = date.getDate();
-
-        if (mm < 10)
-            mm = "0" + mm;
-        if (dd < 10)
-            dd = "0" + dd;
+        let today = new Date();   
+        let year = today.getFullYear(); // 년도
+        let month = today.getMonth() + 1;  // 월
+        let date = today.getDate();  // 날짜
+        
+        if (month < 10)
+            month = "0" + month;
+        if (date < 10)
+            date = "0" + date;
             
-        return yyyy + "." + mm + "." +dd;
-        console.log(moment(). format('yyyy년 mm 월 dd 일'));
+        return year + "." + month + "." +date;
+        console.log(moment(). format('year년 month 월 date 일'));
     }
 
     // 최종 날짜 
